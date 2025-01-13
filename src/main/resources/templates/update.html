@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>게시글 수정</title>
+  <style>
+    /* 전역 스타일 초기화 */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Arial', sans-serif;
+    }
+
+    body {
+        background-color: #f4f7fa;
+        color: #333;
+        text-align: center;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2.5em;
+        color: #4CAF50;
+        margin-bottom: 30px;
+    }
+
+    /* 폼 스타일 */
+    form {
+        width: 60%;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+        text-align: left;
+        margin-bottom: 20px;
+    }
+
+    .form-group span {
+        display: inline-block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        color: #4CAF50;
+    }
+
+    input[type="text"], textarea {
+        width: 100%;
+        padding: 10px;
+        margin-top: 8px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 1em;
+        color: #333;
+    }
+
+    textarea {
+        resize: vertical;
+    }
+
+    input[type="button"] {
+        width: 100%;
+        padding: 12px;
+        background-color: #007BFF;
+        color: white;
+        font-size: 1.2em;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    input[type="button"]:hover {
+        background-color: #0056b3;
+        transform: translateY(-3px);
+    }
+
+    input[type="button"]:active {
+        background-color: #003f7d;
+        transform: translateY(0);
+    }
+
+    /* 반응형 디자인 */
+    @media (max-width: 768px) {
+        form {
+            width: 90%;
+        }
+
+        input[type="button"] {
+            font-size: 1em;
+            padding: 10px;
+        }
+    }
+  </style>
+</head>
+<body>
+<h1>게시글 수정</h1>
+<form th:action="@{|/update/${board.id}|}" method="post" name="updateForm">
+  <input type="hidden" name="id" th:value="${board.id}">
+
+  <div class="form-group">
+    <span>작성자:</span>
+    <input type="text" name="boardWriter" th:value="${board.boardWriter}" readonly>
+  </div>
+
+  <div class="form-group">
+    <span>제목:</span>
+    <input type="text" name="boardTitle" th:value="${board.boardTitle}">
+  </div>
+
+  <div class="form-group">
+    <span>비밀번호:</span>
+    <input type="text" name="boardPass" id="board-pass">
+  </div>
+
+  <div class="form-group">
+    <span>내용:</span>
+    <textarea name="boardContents" cols="30" rows="10" th:text="${board.boardContents}"></textarea>
+  </div>
+
+  <input type="button" value="수정" onclick="board_update()">
+</form>
+
+<script th:inline="javascript">
+  const board_update = () => {
+      const boardPass = document.getElementById("board-pass").value;
+      const passDB = /*[[${board.boardPass}]]*/'${board.boardPass}';  // Thymeleaf inline variable
+      if (boardPass == passDB) {
+          updateForm.submit();
+      } else {
+          alert("비밀번호가 틀립니다!!");
+      }
+  }
+</script>
+</body>
+</html>

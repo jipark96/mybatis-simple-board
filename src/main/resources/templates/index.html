@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /* 전체 스타일 초기화 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* 페이지 전체 배경과 글자 색상 설정 */
+        body {
+            background-color: #f4f7fa;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* 제목 스타일 */
+        h2 {
+            font-size: 2.5em;
+            color: #4CAF50;
+            margin-bottom: 40px;
+        }
+
+        /* 링크 스타일 */
+        a {
+            display: inline-block;
+            padding: 15px 30px;
+            margin: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        /* 링크에 마우스를 올렸을 때 스타일 */
+        a:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
+        }
+
+        /* 링크가 비활성화일 때 스타일 */
+        a:active {
+            background-color: #003f7d;
+            transform: translateY(0);
+        }
+
+        /* 작은 화면에서 링크 크기 및 레이아웃 조정 */
+        @media (max-width: 600px) {
+            a {
+                padding: 12px 20px;
+                font-size: 1em;
+            }
+
+            h2 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+<h2>Hello Spring Boot</h2>
+<a href="/save">글작성</a>
+<a href="/list">글목록</a>
+</body>
+</html>

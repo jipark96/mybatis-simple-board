@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시판</title>
+    <style>
+        /* 전역 스타일 초기화 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f4f7fa;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* 제목 스타일 */
+        h1 {
+            font-size: 3em;  /* 제목 크기 증가 */
+            color: #333;  /* 더 어두운 색으로 가독성 향상 */
+            margin-bottom: 30px;
+            font-weight: bold;  /* 제목을 굵게 표시 */
+        }
+
+        /* 글쓰기 버튼 스타일 */
+        a {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px 0;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        a:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
+        }
+
+        a:active {
+            background-color: #003f7d;
+            transform: translateY(0);
+        }
+
+        /* 테이블 스타일 */
+        table {
+            width: 80%;
+            margin: 30px auto;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        td {
+            background-color: #fff;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover td {
+            background-color: #f1f1f1;
+        }
+
+
+        a.board-link:hover {
+            text-decoration: underline; /* 마우스 오버 시 밑줄 추가 */
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            table {
+                width: 95%;
+            }
+
+            th, td {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+<h1>게시판</h1>
+<a href="/save">글쓰기</a>
+<table>
+    <tr>
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성시간</th>
+        <th>조회수</th>
+    </tr>
+    <tr th:each="board : ${boardList}">
+        <td th:text="${board.id}"></td>
+        <td>
+            <a class="board-link" th:text="${board.boardTitle}" th:href="@{/{id}(id=${board.id})}"></a>
+        </td>
+        <td th:text="${board.boardWriter}"></td>
+        <td th:text="${board.createdAt}"></td>
+        <td th:text="${board.boardHits}"></td>
+    </tr>
+</table>
+</body>
+</html>
