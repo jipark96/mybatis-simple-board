@@ -36,5 +36,4 @@ out/
 ### VS Code ###
 .vscode/
 
-### sql password ###
-**/src/main/resources/application.yml
+**/main/resources/application.yml
